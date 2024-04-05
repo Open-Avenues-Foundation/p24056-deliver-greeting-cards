@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => { //fetch to GET req
     const fetchData = async () => {
       try {
-        const cards = await fetch('http://localhost:5001/api/postcards');
+        const cards = await fetch('https://deliver-greeting-cards.herokuapp.com/api/postcards');
         const data = await cards.json(); // converts to json
         updatePostcards(data.data); // Log data inside the async function
         console.log(data.data);
