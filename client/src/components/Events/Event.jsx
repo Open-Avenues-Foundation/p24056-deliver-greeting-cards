@@ -83,7 +83,7 @@ export class CreateEvent extends React.Component {
             const events = res.data;
 
             console.log(events);
-            
+
             this.setState({ events });
             this.setState({ events: res.data });
         });
@@ -102,9 +102,18 @@ export class CreateEvent extends React.Component {
 
         this.setState({ events: updatedEvents });
     }
+    
     render() {
         return (
         <div className="Event">
+        <div className="Users">
+            <div className="CreateUserContainer">
+            <CreateUser />
+            </div>
+            <div className="ViewUsersContainer">
+            <ViewUsers />
+            </div>
+        </div>
         <div className="postEvent">
             <form onSubmit={this.handleSubmit}>
                 <label>
@@ -123,102 +132,101 @@ export class CreateEvent extends React.Component {
             </form>
         </div>
         <div className="Table">
-        <div className="home">
-            <table>
+            <div className="home">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className = "header-cell">ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+                        .map((event, i) => (
+                            <tr key={event.id}>
+                                <td>{event.id}</td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div className="home">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className = "header-cell">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+                        .map((event, i) => (
+                            <tr key={event.id}>
+                                <td>{event.event_type}</td>
+                                {/* Add more td tags if you want to display other properties of event */}
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div className="home">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className = "header-cell">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+                        .map((event, i) => (
+                            <tr key={event.id}>
+                                <td>{event.date}</td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div className="home ">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className = "header-cell">User ID  Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+                        .map((event, i) => (
+                            <tr key={event.id}>
+                                <td>{event.user_id}</td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div className="home butt">
                 <thead>
                     <tr>
-                        <th className = "header-cell">ID</th>
+                        <th className="header-cell" style={{visibility: 'hidden'}}>Hidden Header</th>
                     </tr>
                 </thead>
                 <tbody>
                 {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
                     .map((event, i) => (
                         <tr key={event.id}>
-                            <td>{event.id}</td>
+                            <td>
+                                <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
+                            </td>
                         </tr>
                     ))
                 }
                 </tbody>
-            </table>
+            </div>
         </div>
-        <div className="home">
-            <table>
-                <thead>
-                    <tr>
-                        <th className = "header-cell">Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
-                    .map((event, i) => (
-                        <tr key={event.id}>
-                            <td>{event.event_type}</td>
-                            {/* Add more td tags if you want to display other properties of event */}
-                        </tr>
-                    ))
-                }
-                </tbody>
-            </table>
         </div>
-        <div className="home">
-            <table>
-                <thead>
-                    <tr>
-                        <th className = "header-cell">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
-                    .map((event, i) => (
-                        <tr key={event.id}>
-                            <td>{event.date}</td>
-                        </tr>
-                    ))
-                }
-                </tbody>
-            </table>
-        </div>
-        <div className="home ">
-            <table>
-                <thead>
-                    <tr>
-                        <th className = "header-cell">User ID  Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
-                    .map((event, i) => (
-                        <tr key={event.id}>
-                            <td>{event.user_id}</td>
-                        </tr>
-                    ))
-                }
-                </tbody>
-            </table>
-        </div>
-        <div className="home butt">
-            <thead>
-                <tr>
-                    <th className="header-cell" style={{visibility: 'hidden'}}>Hidden Header</th>
-                </tr>
-            </thead>
-            <tbody>
-            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
-                .map((event, i) => (
-                    <tr key={event.id}>
-                        <td>
-                            <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
-                        </td>
-                    </tr>
-                ))
-            }
-            </tbody>
-        </div>
-    </div>
-    </div>
-    ); 
-}
+        ); 
+    }
 }
 
 export default withAuth0(CreateEvent);
