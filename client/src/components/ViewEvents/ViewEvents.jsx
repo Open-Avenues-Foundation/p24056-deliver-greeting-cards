@@ -15,6 +15,8 @@ export default class ViewEvents extends React.Component {
       .get("https://deliver-greeting-cards.herokuapp.com/api/events")
       .then((res) => {
         const events = res.data;
+        console.log('events');
+        console.log(events);
         console.log(events);
         this.setState({ events });
       });
@@ -85,31 +87,6 @@ export default class ViewEvents extends React.Component {
           </table>
         </div>
       </div>
-      // <div className="home">
-      //     <h1>View Events</h1>
-      //     <table class={styles.tb}>
-      //         <thead>
-      //             <tr>
-      //                 <th>ID</th>
-      //                 <th>Type</th>
-      //                 <th>Date</th>
-      //                 <th>User ID</th>
-      //             </tr>
-      //         </thead>
-      //         <tbody>
-      //             {
-      //                 this.state.events.map(event =>
-      //                     <tr key={event.id}>
-      //                         <td>{event.id}</td>
-      //                         <td>{event.event_type}</td>
-      //                         <td>{event.date}</td>
-      //                         <td>{event.user_id}</td>
-      //                     </tr>
-      //                 )
-      //             }
-      //         </tbody>
-      //     </table>
-      // </div>
     );
   }
 }
