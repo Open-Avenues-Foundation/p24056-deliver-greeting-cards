@@ -46,7 +46,6 @@ const CreateUser = ({ users, setUsers }) => {
       if (response.ok) {
 
         const createdUser = await response.json(); // Get the created user object from response
-        console.log("User created successfully!", createdUser);
 
         // Update local state with the new user including its returned id
         setUsers([...users, createdUser]);

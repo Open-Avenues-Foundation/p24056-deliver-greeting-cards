@@ -1,29 +1,21 @@
 .home {
-  margin: 0;
-  border-collapse: collapse;
-  width: 25%;
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-}
-
-table {
   width: 100%;
+  /* Ensure table takes full width */
+  border-collapse: collapse;
+  /* Collapse table borders */
 }
 
-th,
-td {
-  text-align: left;
+.home th,
+.home td {
   padding: 8px;
+  text-align: left;
 }
 
-tr:nth-child(even) {
+.home tr:nth-child(even) {
   background-color: lightgray;
 }
 
-button{
+button {
   float: right;
   margin: 0;
   padding: 0;

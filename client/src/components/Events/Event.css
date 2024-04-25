@@ -1,128 +1,105 @@
-body, html, div {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* The main container box */
-.Event {
+.Events {
     display: flex;
-    
-    min-height: 100vh; /* Minimum height, can adjust as needed */
-    justify-content: space-between; /* This will ensure any space is distributed between the two boxes */
-    padding: 2em; /* Gives some space inside the large box */
+    justify-content: space-between;
+    padding: 2em;
+    flex-wrap: wrap;
+    /* Allow items to wrap to the next line if needed */
 }
 
-/* The two smaller boxes inside */
+.CreateEventContainer,
+.ViewEventsContainer {
+    flex: 1 0 calc(50% - 1em);
+    /* Set a flexible width for each container with spacing */
+    margin-bottom: 2em;
+    /* Add vertical spacing between containers */
+}
+
 .postEvent {
-    width: 30%; /* Sets the width to 30% of the parent container */
-    padding: 1em; /* Space inside each box */
-    margin: 0 1em; /* Space outside each box. Adjust as needed */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow for depth */
-    border: 1px solid #e1e1e1; /* Optional: Adds a border */
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e1e1;
 }
-
-
 
 .postEvent input[type="text"] {
-    flex: 1; /* This allows it to occupy the remaining space */
-    max-width: 83%; /* You can adjust this as needed, e.g., 50% would make it half the width of its container */
-    margin-left: 10px; /* Optional: Add some space between the label and the input */
+    width: 100%;
+    /* Occupy full width within postEvent container */
+    padding: 8px;
+    /* Adjust input padding */
+    margin-bottom: 10px;
+    /* Add spacing below input fields */
 }
 
-
 button[type="submit"] {
-    background-color: #007BFF; /* A nice shade of blue */
-    color: #fff; /* White text color */
-    border: none; /* Remove default borders */
-    padding: 10px 20px; /* Vertical and horizontal padding */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 1rem; /* Font size */
-    cursor: pointer; /* Hand cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3; /* Slightly darker shade of blue on hover */
+    background-color: #0056b3;
 }
 
 button[type="submit"]:active {
-    background-color: #004085; /* Even darker shade for active/click effect */
+    background-color: #004085;
 }
 
-.Table{
-    display: flex;
-    flex-direction: row;
+.home {
+    width: 100%;
+    overflow-x: auto;
+    /* Enable horizontal scrolling for table if needed */
 }
 
-/* ... existing styles ... */
-
-/* Style for the table headers */
 .header-cell {
-
     text-align: center;
-    background-color: #009879; /* Background color for headers */
-    color: #ffffff; /* Text color for headers */
-    padding: 12px 15px; /* Padding for headers */
-    border-radius: 5px 5px 0 0; /* Rounded corners for headers */
+    background-color: #009879;
+    color: #ffffff;
+    padding: 12px 15px;
+    border-radius: 5px 5px 0 0;
 }
 
-/* Style for table data cells */
 .home td {
-    width: 100vw; /* Takes the full viewport width */
     text-align: center;
-    padding: 12px 15px; /* Padding for data cells */
+    padding: 12px 15px;
 }
 
-/* Style for alternate row coloring */
 .home tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-/* Style for rounded corners on the table */
 .home table {
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: 10px; /* Adjust radius for desired roundness */
-    overflow: hidden;
+    border-radius: 10px;
 }
 
-/* Additional style for the Delete button if needed */
 .home button {
-    background-color: #ff0000; /* Red background */
-    color: #ffffff; /* White text */
-    border: none; /* No border */
-    padding: 5px 10px; /* Padding */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Hand cursor on hover */
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
     white-space: nowrap;
 }
 
 .home button:hover {
-    background-color: #cc0000; /* Darker red on hover */
+    background-color: #cc0000;
 }
 
 .home tr {
-    height: 50px; /* Adjust height as needed */
+    height: 50px;
 }
 
-.home table {
-    width: 100%; /* Adjust width as needed */
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 10px; /* Adjust radius for desired roundness */
-    overflow: hidden;
+.size tr {
+    height: 30px;
 }
 
-.butt{
-    width: 10% !important;
-}
-
-.size tr{
-    height : 30px !important;
-}
-.size table{
+.size table {
     width: 20px;
 }
-
-

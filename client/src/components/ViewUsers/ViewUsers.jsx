@@ -1,4 +1,4 @@
-// import "./ViewUsers.css";
+import "./ViewUsers.css";
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -27,7 +27,6 @@ export const ViewUsers = ({ users, setUsers }) => {
           const filteredUsers = data.filter(
             (user) => user.application_user_id === application_user_id
           );
-          console.log(filteredUsers);
           setUsers(filteredUsers);
         }
       } catch (error) {
@@ -47,8 +46,6 @@ export const ViewUsers = ({ users, setUsers }) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("Response: ", response)
-      // setUsers(users.filter((user) => user.id !== id));
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
     } catch (err) {
       console.error("Error deleting user", err.message);
