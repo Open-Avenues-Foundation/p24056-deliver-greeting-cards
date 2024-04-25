@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const CreateUser = ({ users, setUsers }) => {
+  // Destructure user and isAuthenticated from the useAuth0 hook
   const { user, isAuthenticated } = useAuth0();
+
+  // State to manage form data for creating a new user
   const [formData, setFormData] = useState({
     name: "",
     address_id: "",
@@ -11,12 +14,13 @@ const CreateUser = ({ users, setUsers }) => {
     application_user_id: isAuthenticated ? user.sub : "", // Set application_user_id if authenticated
   });
 
+  // Handle input changes in the form fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-
+  // Handle form submission when creating a new user
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,6 +39,7 @@ const CreateUser = ({ users, setUsers }) => {
     };
 
     try {
+      // Send POST request to API to create a new user
       const response = await fetch("https://deliver-greeting-cards.herokuapp.com/api/users", {
         method: "POST",
         headers: {
@@ -93,6 +98,7 @@ const CreateUser = ({ users, setUsers }) => {
             />
           </label>
         </div>
+        {/* Conditionally render button based on authentication status */}
         {isAuthenticated ? (
           <button type="submit">Add User</button>
         ) : (
@@ -103,4 +109,4 @@ const CreateUser = ({ users, setUsers }) => {
   );
 };
 
-export default CreateUser;
+export default CreateUser; // Export CreateUser component as default
