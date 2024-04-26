@@ -6,8 +6,8 @@
 
 .whole {
   display: flex;
-  justify-content: space-between;  /* Add some space between the two divs */
-  align-items: flex-start;  /* Align items to the top of the container */
+  justify-content: space-between; /* Add some space between the two divs */
+  align-items: flex-start; /* Align items to the top of the container */
 }
 
 label {

@@ -32,7 +32,12 @@ async function insertUser(name, address_id, application_user_id, client) {
     const address_id = process.argv[3];
     const application_user_id = process.argv[4];
 
-    const user = await insertUser(name, address_id, application_user_id, client);
+    const user = await insertUser(
+      name,
+      address_id,
+      application_user_id,
+      client,
+    );
     console.log(user);
   } catch (e) {
     console.log(e);

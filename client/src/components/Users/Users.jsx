@@ -8,16 +8,16 @@ import "./Users.css";
 export default class Users extends React.Component {
   // Your class methods and state go here, if needed
 
-render() {
+  render() {
     return (
-    <div className="Users">
+      <div className="Users">
         <div className="CreateUserContainer">
-        <CreateUser />
+          <CreateUser />
         </div>
         <div className="ViewUsersContainer">
-        <ViewUsers />
+          <ViewUsers />
         </div>
-    </div>
+      </div>
     );
-}
+  }
 }

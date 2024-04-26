@@ -15,24 +15,24 @@ export default class ViewEvents extends React.Component {
       .get("https://deliver-greeting-cards.herokuapp.com/api/events")
       .then((res) => {
         const events = res.data;
-        console.log('events');
+        console.log("events");
         console.log(events);
         console.log(events);
         this.setState({ events });
       });
   }
 
-  handleDeleteEvent = id => {
+  handleDeleteEvent = (id) => {
     axios
       .delete(`https://deliver-greeting-cards.herokuapp.com/api/events/${id}`)
       .then((res) => {
-        console.log('DELETED!!');
+        console.log("DELETED!!");
         console.log(res);
         console.log(res.data);
       });
-    const updatedEvents = this.state.events.filter(event => event.id !== id);
+    const updatedEvents = this.state.events.filter((event) => event.id !== id);
     this.setState({ events: updatedEvents });
-  }
+  };
 
   render() {
     return (
@@ -80,7 +80,9 @@ export default class ViewEvents extends React.Component {
               return (
                 <tr key={event.id}>
                   <td>{event.user_id}</td>
-                  <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
+                  <button onClick={() => this.handleDeleteEvent(event.id)}>
+                    Delete entry
+                  </button>
                 </tr>
               );
             })}

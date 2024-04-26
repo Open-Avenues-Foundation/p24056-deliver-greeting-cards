@@ -1,26 +1,24 @@
 .loginbutton {
-    display: flex;
-    justify-content: center; /* Aligns items horizontally at the center */
-    align-items: center; /* Aligns items vertically at the center */
-    height: 20vh; /* Sets the height of the container to the full viewport height */
-    margin-top: -50px; /* Optional: Adjusts the position slightly upwards */
+  display: flex;
+  justify-content: center; /* Aligns items horizontally at the center */
+  align-items: center; /* Aligns items vertically at the center */
+  height: 20vh; /* Sets the height of the container to the full viewport height */
+  margin-top: -50px; /* Optional: Adjusts the position slightly upwards */
 }
 
 /* If you also want to style the button itself */
 .loginbutton button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
 }
-
-
 
 /* Additional style for the container of user information */
 .user-container {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
