@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const cors = require("cors");
 const express = require("express");
@@ -6,7 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const pg = require("pg");
-const Lob = require('lob')(process.env.LOB_API_KEY);
+const Lob = require("lob")(process.env.LOB_API_KEY);
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -49,7 +49,7 @@ app.get("/api/events/:id", async (req, res) => {
 app.post("/api/events", async (req, res) => {
   console.log(req.body); // Right inside the POST endpoint
 
-  const event_type = req.body.event_type;                                         
+  const event_type = req.body.event_type;
   const date = req.body.date;
   const user_id = req.body.user_id;
   const application_user_id = req.body.application_user_id;
@@ -59,7 +59,6 @@ app.post("/api/events", async (req, res) => {
   );
   res.send(response.rows[0]);
 });
-
 
 // this endpoint should update an event by its id
 app.patch("/api/events/:id", async (req, res) => {
@@ -113,12 +112,11 @@ app.get("/api/users/:id", async (req, res) => {
 // this endpoint should create a new user in the database
 app.post("/api/users", async (req, res) => {
   const { name, address_id, application_user_id } = req.body; // Destructuring for clarity
-    const response = await client.query(
-      "INSERT INTO users (name, address_id, application_user_id) VALUES ($1, $2, $3) RETURNING *",
-      [name, address_id, application_user_id]
-    );
-    res.send(response.rows[0]);
-
+  const response = await client.query(
+    "INSERT INTO users (name, address_id, application_user_id) VALUES ($1, $2, $3) RETURNING *",
+    [name, address_id, application_user_id],
+  );
+  res.send(response.rows[0]);
 });
 // this endpoint should update a user by its id
 app.patch("/api/users/:id", async (req, res) => {
@@ -144,30 +142,31 @@ app.delete("/api/events/:id", async (req, res) => {
   res.send(response.rows);
 });
 
-
 // this endpoint should delete a user by its id -- IMADE
-app.delete('/api/users/:id', async (req, res) => {
-  if (req.params.id == null){ 
-    res.status(404).send('HTTP Not Found Error'); 
+app.delete("/api/users/:id", async (req, res) => {
+  if (req.params.id == null) {
+    res.status(404).send("HTTP Not Found Error");
     return;
   }
-  if (req.params.id != null){
-    const response = await client.query('DELETE FROM users WHERE id = $1', [req.params.id]); 
-    res.send(response.rows); 
+  if (req.params.id != null) {
+    const response = await client.query("DELETE FROM users WHERE id = $1", [
+      req.params.id,
+    ]);
+    res.send(response.rows);
   }
 });
 
 // This endpoint should retrieve the list of addresses that are stored in Lob's system using the Lobe Node SDK -- IMADE
-app.get('/api/addresses', async (req, res) => {
-    const response = await Lob.addresses.list();
-    res.send(response); 
-  });
+app.get("/api/addresses", async (req, res) => {
+  const response = await Lob.addresses.list();
+  res.send(response);
+});
 
 // retrieves the list of postcards that have been sent through Lob’s system using the Lob Node SDK
-app.get('/api/postcards', async (req, res) => {
+app.get("/api/postcards", async (req, res) => {
   const response = await Lob.postcards.list();
   res.send(response);
-})
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

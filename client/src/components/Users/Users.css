@@ -1,32 +1,32 @@
 .Users {
-    display: flex;
+  display: flex;
 
-    min-height: 100vh; 
-    padding: 2em;
+  min-height: 100vh;
+  padding: 2em;
 }
 
-.CreateUserContainer, .ViewUserContainer {
-    width: 30%;
-    padding: 1em;
-    margin: 0; /* Setting margin to 0 will make them touch */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e1e1e1;
+.CreateUserContainer,
+.ViewUserContainer {
+  width: 30%;
+  padding: 1em;
+  margin: 0; /* Setting margin to 0 will make them touch */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e1e1;
 }
 
 .ViewUserContainer {
-    width: 100wh !important;
+  width: 100wh !important;
 }
-.CreateUserContainer input[type="text"], .ViewUserContainer input[type="text"] {
-    flex: 1;
-    max-width: 83%;
-    margin-left: 10px;
+.CreateUserContainer input[type="text"],
+.ViewUserContainer input[type="text"] {
+  flex: 1;
+  max-width: 83%;
+  margin-left: 10px;
 }
 
-.Users{
-
-        display: flex;
-        min-height: 100vh; /* Minimum height, can adjust as needed */
-        justify-content: center !important;
-        padding: 2em; /* Gives some space inside the large box */
-    
+.Users {
+  display: flex;
+  min-height: 100vh; /* Minimum height, can adjust as needed */
+  justify-content: center !important;
+  padding: 2em; /* Gives some space inside the large box */
 }

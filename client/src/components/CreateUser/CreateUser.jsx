@@ -27,17 +27,17 @@ class CreateUser extends React.Component {
     axios
       .post("https://deliver-greeting-cards.herokuapp.com/api/users", data)
       .then((response) => {
-        console.log('ADDED!!');
+        console.log("ADDED!!");
         console.log(response);
         console.log(response.data);
         // Reloading the page
         window.location.reload();
-        this.setState(prevState => ({
-          events: [...prevState.events, response.data]
+        this.setState((prevState) => ({
+          events: [...prevState.events, response.data],
         }));
       })
       .catch((error) => {
-        console.error('Error adding event:', error);
+        console.error("Error adding event:", error);
       });
   };
 
@@ -55,7 +55,7 @@ class CreateUser extends React.Component {
     const { user, isAuthenticated } = this.props.auth0;
     if (isAuthenticated && user) {
       this.setState({ application_user_id: user.sub });
-  }
+    }
     axios
       .get("https://deliver-greeting-cards.herokuapp.com/api/events")
       .then((res) => {
@@ -64,8 +64,6 @@ class CreateUser extends React.Component {
         this.setState({ events: res.data });
       });
   }
-
-
 
   render() {
     return (
@@ -77,7 +75,11 @@ class CreateUser extends React.Component {
           </label>
           <label>
             Address ID:
-            <input type="text" name="address_id" onChange={this.handleAddressChange} />
+            <input
+              type="text"
+              name="address_id"
+              onChange={this.handleAddressChange}
+            />
           </label>
           <button type="submit">Add User</button>
         </form>

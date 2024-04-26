@@ -1,58 +1,57 @@
 /* Postcard.css */
 
 .postcardBox {
-    display: flex;
-    flex-wrap: wrap;
-    width: 1500px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #b285c2;
-    border-radius: 5px;
-    box-shadow: 10 10 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  width: 1500px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b285c2;
+  border-radius: 5px;
+  box-shadow: 10 10 20px rgba(0, 0, 0, 0.1);
 }
 
 .postcardBox .items {
-    display: flex; 
+  display: flex;
 }
 
 .postcardBox .items h1 {
-    height: 50px;
-    color: #fff;
-    font-size: 16px;
-    margin: 30px; 
-    padding: 20px;
-    cursor: pointer;
+  height: 50px;
+  color: #fff;
+  font-size: 16px;
+  margin: 30px;
+  padding: 20px;
+  cursor: pointer;
 }
 
 .postcardBox .items p {
-    height: 50px;
-    color: #fff;
-    font-size: 10px;
-    margin: 30px; 
-    padding: 20px;
+  height: 50px;
+  color: #fff;
+  font-size: 10px;
+  margin: 30px;
+  padding: 20px;
 }
 
 .postcardBox .items img {
-   height: 150px;
-   width: 300px;
-   border-radius: 5px;
-   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-   cursor: pointer;
+  height: 150px;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
-    .postcardBox {
-        width: 500px;;
-        flex-direction: column; 
-        align-items: stretch; 
-    }
+  .postcardBox {
+    width: 500px;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .postcardBox .items {
-        flex-direction: column; 
-    }
+  .postcardBox .items {
+    flex-direction: column;
+  }
 
-    .postcardBox .items h1 {
-        margin-bottom: 10px; 
-    }
+  .postcardBox .items h1 {
+    margin-bottom: 10px;
+  }
 }
-

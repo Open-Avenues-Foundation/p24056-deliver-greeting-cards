@@ -23,7 +23,7 @@ tr:nth-child(even) {
   background-color: lightgray;
 }
 
-button{
+button {
   float: right;
   margin: 0;
   padding: 0;
