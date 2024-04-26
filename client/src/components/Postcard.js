@@ -17,7 +17,7 @@ const Postcard = ({ data }) => {
                 <div><h1>Where To: {data.to.description}</h1></div>
                 <div><h1>From: lmao idk if this prints</h1></div> 
                 <div><h1>Date Created: {data.date_created}</h1></div>
-                <div><h1>Tracking Status: {data.tracking_events[data.tracking_events.length - 1].name}</h1></div>
+                <div><h1>Tracking Status: {data.tracking_events[data.tracking_events.length - 1]?.name}</h1></div>
             </div>
         </div>
     );

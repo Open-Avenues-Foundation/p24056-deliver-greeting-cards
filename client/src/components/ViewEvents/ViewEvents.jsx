@@ -105,7 +105,6 @@ const ViewEvents = ({ events, setEvents }) => {
             </div>
         );
     }
-
 };
 
 export default ViewEvents; // Export ViewEvents component as default
