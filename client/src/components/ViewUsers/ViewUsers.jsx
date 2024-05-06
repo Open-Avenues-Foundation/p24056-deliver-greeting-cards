@@ -1,142 +1,109 @@
 import "./ViewUsers.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-export const ViewUsers = () => {
-  const [name, setName] = useState([]);
-  const [addresses, setAddresses] = useState([]);
-  const [application_user_id, setApplication_user_id] = useState("");
+
+export const ViewUsers = ({ users, setUsers }) => {
+  //Destructure user and isAuthenticated from the useAuth0 hook
   const { user, isAuthenticated } = useAuth0();
-  
+
+  // Fetch users data from API when component mounts or auth status changes
   useEffect(() => {
-    if (isAuthenticated && user) {
-      setApplication_user_id(user.sub);
-    }
-    fetch('https://deliver-greeting-cards.herokuapp.com/api/addresses', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      const addressIds = data.data.map(address => address.id);
-      setAddresses(addressIds);
-    })
-    .catch(error => console.error('Error fetching data:', error));
-
-  }, [user, isAuthenticated]);
-  
-  async function fetchText() {
-    let response = await fetch(
-      "https://deliver-greeting-cards.herokuapp.com/api/users",
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-    let data = await response.json();
-    setName(data);
-    console.log(data);
-  }
-
-  useEffect(() => {
-    fetchText();
-  }, []);
-
-
-
-    
-    const handleDelete = async (id) => {
+    const fetchUsers = async () => {
       try {
-        const response = await fetch(`https://deliver-greeting-cards.herokuapp.com/api/users/${id}`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" }, 
-        });
-        console.log(response); 
-        window.location.reload(); 
-      }
-        catch (err) { 
-            console.error("Error deleting user", err.message); 
+        // Check if user is authenticated before proceeding
+        if (isAuthenticated && user) {
+          // Get the authenticated user's ID
+          const application_user_id = user.sub;
+          const response = await fetch(
+            "https://deliver-greeting-cards.herokuapp.com/api/users",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          
+          if (!response.ok) {
+            throw new Error("Failed to fetch users");
+          }
+
+          const data = await response.json();
+          // Filter users to show only those belonging to the authenticated user
+          const filteredUsers = data.filter(
+            (user) => user.application_user_id === application_user_id
+          );
+          setUsers(filteredUsers);
         }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
     };
 
+    fetchUsers();
+  }, [isAuthenticated, user, setUsers]);
 
+  // Handle user deletion
+  const handleDelete = async (id) => {
+    try {
+      // Delete user via API
+      const response = await fetch(
+        `https://deliver-greeting-cards.herokuapp.com/api/users/${id}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      // Update local users state after successful deletion
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    } catch (err) {
+      console.error("Error deleting user", err.message);
+    }
+  };
+
+  // Render users table if user is authenticated
+  if (isAuthenticated && user) {
     return (
-        <div>
-            <div className="header">
-                <div className="home">
-                    
-                    <table>
-                      <thead>
-                        
-                          <tr>
-                            <th className = "header-cell">Name</th></tr>
-                          </thead>
-                          {name.filter(data => data.application_user_id === application_user_id)
-                          .map((data, i) => (
-                            <tr key={i}>
-                                <td>{data.name ? data.name : "Tameem"}</td>
-                            </tr>
-                        ))
-                    }
-                    </table>
-                </div>
-                <div className="home addr">
-    <table>
-        <thead>
-            <tr>
-                <th className="header-cell">Address ID</th>
-            </tr>
-        </thead>
-        <tbody>
-        {name.filter(data => data.application_user_id === application_user_id)
-                        .map((data, i) => {
-        const isMatch = addresses.includes(data.address_id);
-        return (
-            <tr key={i}>
-                <td>
-                    {isMatch ? (
-                        <a href={`https://dashboard.lob.com/addresses/${data.address_id}`} target="_blank">
-                            {data.address_id}
-                        </a>
-                    ) : (
-                        data.address_id || "N/A"  
-                    )}
-                </td>
-            </tr>
-        );
-                    })
-                    }
-
-</tbody>
-
-
-    </table>
-</div>
-
-                <div className="home butt">
-                          
-  <table>
-  <thead>
-                          <tr>
-                            <th className = "header-cell">Delete</th></tr>
-                          </thead>
-      {name.filter(data => data.application_user_id === application_user_id)
-     .map((data, i, filteredArray) => (
-       <tr key={i} className={i === filteredArray.length - 1 ? "last-row" : ""}>
-         <td>
-           <button onClick={() => handleDelete(data.id)}>Delete</button>
-         </td>
-       </tr>
-     ))
-}
-  </table>
-</div>
-            </div>
+      <div>
+        <div className="header">
+          <div className="home">
+            <table>
+              <thead>
+                <tr>
+                  <th className="header-cell">Name</th>
+                  <th className="header-cell">Address ID</th>
+                  <th className="header-cell">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Map through users array to display users data */}
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.name ? user.name : "Unknown"}</td>
+                    <td>{user.address_id || "N/A"}</td>
+                    <td>
+                      {/* Button to delete a user */}
+                      <button onClick={() => handleDelete(user.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     );
-                        }
-export default ViewUsers;
+  } else {
+    // Render sign-in message if user is not authenticated
+    return(
+      <div>
+        <p>Sign in Please</p>
+      </div>
+    );
+  }
+  
+};
+
+export default ViewUsers; // Export ViewUsers component as default
